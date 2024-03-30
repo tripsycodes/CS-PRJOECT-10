@@ -1,0 +1,8 @@
+<> used to import system header file
+"" used to import user-defined file
+
+calloc  -->It initializes each block with a default value ‘0’.
+It has two parameters or arguments as compare to malloc().
+
+ptr = (cast-type*)calloc(n, element-size);
+here, n is the no. of elements and element-size is the size of each element.
