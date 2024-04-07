@@ -1,4 +1,4 @@
-#include "numc.h"
+#include "mlearning.h"
 int main() {
     // Using linspace function from header file
     double start = 1.0;
@@ -40,5 +40,10 @@ int main() {
     printf("\n");
     free(result_2);
 
+    //using dimension & shape functions from header file
+    int arr[4][5][2][3];
+    int result_d = dimension(arr);
+    int result_s = shape(arr);
+    printf("Dimension of the assumed array is %d and its size is %d.\n", result_d, result_s);
     return 0;
 }
