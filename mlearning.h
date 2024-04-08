@@ -345,4 +345,104 @@ char *polynomial(int *arr)
     return poly;
 }
 
+char *integrate(float *arr) // To integrate polynomials
+{
+    int n, deg;
+    deg = length(arr) - 1;
+    int j = 0;
+    while (1)
+    {
+        if (arr[j] = '\0')
+            break;
+
+        if (arr[j] != 0)
+        {
+            n++;
+        }
+        j++;
+    }
+
+    int *exp;
+    int terms = deg + 1; // No. of terms
+    exp = (int *)malloc(terms * sizeof(int));
+    int exponent[terms];
+
+    int k = 0;
+    while (k < terms)
+    {
+        exponent[k] = deg - k;
+        k++;
+    }
+
+    int m = 6 * n;
+    int *ptr;
+    ptr = (int *)malloc(m * sizeof(char));
+    char poly[m];
+
+    int i = 0;
+    while (arr[i] != '0')
+    {
+        if (arr[i] != 0)
+        {
+            poly[(6 * i)] = (float)arr[i] / (float)(exponent[i] + 1);
+            poly[(6 * i) + 1] = 'x';
+            poly[(6 * i) + 2] = '^';
+            poly[(6 * i) + 3] = (int)(exponent[i] + 1);
+        }
+        i++;
+    }
+    poly[m - 1] = '\0';
+    return poly;
+}
+
+char *differentiate(float *arr) // To differentiate polynomials
+{
+    int n, deg;
+    deg = length(arr) - 1;
+    int j = 0;
+    while (1)
+    {
+        if (arr[j] = '\0')
+            break;
+
+        if (arr[j] != 0)
+        {
+            n++;
+        }
+        j++;
+    }
+
+    int *exp;
+    int terms = deg + 1; // No. of terms
+    exp = (int *)malloc(terms * sizeof(int));
+    int exponent[terms];
+
+    int k = 0;
+    while (k < terms)
+    {
+        exponent[k] = deg - k;
+        k++;
+    }
+
+    int m = 6 * n;
+    int *ptr;
+    ptr = (int *)malloc(m * sizeof(char));
+    char poly[m];
+
+    int i = 0;
+    while (arr[i] != '0')
+    {
+        if (arr[i] != 0)
+        {
+            poly[(6 * i)] = (float)(arr[i] * exponent[i]);
+            poly[(6 * i) + 1] = 'x';
+            poly[(6 * i) + 2] = '^';
+            poly[(6 * i) + 3] = (int)(exponent[i] - 1);
+        }
+        i++;
+    }
+    poly[m - 1] = '\0';
+    return poly;
+}
+
 
