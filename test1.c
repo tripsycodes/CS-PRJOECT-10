@@ -45,5 +45,10 @@ int main() {
     int result_d = dimension(arr);
     int result_s = shape(arr);
     printf("Dimension of the assumed array is %d and its size is %d.\n", result_d, result_s);
+
+    // using mean function
+    int arr[15] = {1,3,5,7,9,11,13,15,17,19};
+    printf("%d\n",mean(arr) );
+    
     return 0;
 }
