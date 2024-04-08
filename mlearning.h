@@ -99,3 +99,62 @@ int mean(int*arr) {
     mean = sum / n;
     return mean;
 }
+
+typedef struct {
+    int row;
+    int col;
+} Index;
+
+Index* argwhere(int **indicesArray, int rows, int cols, int reqCondition, int *length) {
+    
+    Index* indices = malloc(rows * cols * sizeof(Index));
+    if (indices == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(1);
+    }
+
+    int count = 0; 
+
+    // Loop through the array to find indices where the value is greater than the threshold
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            if (indicesArray[i][j] > reqCondition) {
+                indices[count].row = i;
+                indices[count].col = j;
+                count++;
+            }
+        }
+    }
+
+    
+    *length = count;
+
+    return indices;
+}
+
+void pad_array(int *array, int rows, int cols, int pad_top, int pad_bottom, int pad_left, int pad_right) {
+    int new_rows = rows + pad_top + pad_bottom;
+    int new_cols = cols + pad_left + pad_right;
+
+    int *padded_array = (int *)malloc(new_rows * new_cols * sizeof(int));
+
+    // Fill padded_array with original array
+    for (int i = 0; i < new_rows; i++) {
+        for (int j = 0; j < new_cols; j++) {
+            if (i >= pad_top && i < rows + pad_top && j >= pad_left && j < cols + pad_left) {
+                padded_array[i * new_cols + j] = array[(i - pad_top) * cols + (j - pad_left)];
+            } else {
+                padded_array[i * new_cols + j] = 0;  // Assuming padding with zeros
+            }
+        }
+    }
+
+    // Copy padded_array back to array
+    for (int i = 0; i < new_rows; i++) {
+        for (int j = 0; j < new_cols; j++) {
+            array[i * new_cols + j] = padded_array[i * new_cols + j];
+        }
+    }
+
+    free(padded_array);
+}
