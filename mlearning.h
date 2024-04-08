@@ -2,6 +2,10 @@
 #include<stdlib.h>
 #include<math.h>
 
+int size(int*arr){
+    int out = sizeof(arr)/sizeof(arr[0]);
+}
+
 //To create a function to calculate the length of an array
 int length(int arr[]) {
     int length = 0;
@@ -29,8 +33,9 @@ int dimension(void *arr){
 }
 
 //To create a function to determine the shape of an array
-int shape(void *arr, int dim_size)
+int shape(void *arr)
 {
+    int dim_size = size(arr); 
     int shape = dim_size / sizeof(int);
     return shape;
 }
