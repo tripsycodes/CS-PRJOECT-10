@@ -2,6 +2,17 @@
 #include<stdlib.h>
 #include<math.h>
 
+//To create a function to calculate the length of an array
+int length(int arr[]) {
+    int length = 0;
+    int i = 0;
+    while (arr[i] != '\0') {
+        length++;
+        i++;
+    }
+    return length;
+}
+
 //To create a function that tells the dimension of an array
 int dimension(void *arr){
     int dim = 1;
@@ -67,4 +78,19 @@ double* arange(double start, double end, double step) {
     }
 
     return result;
+}
+
+//To calculate mean of an array
+int mean(int*arr) {
+    int n = length(arr); // Number of data points
+    double sum = 0.0; 
+    double mean; 
+
+    int i=0;
+    while(i<n){
+        sum += arr[i];
+        i++;
+    }
+    mean = sum / n;
+    return mean;
 }
