@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include<stdlib.h>
 #include<math.h>
+#define PI 3.14159265
 
 int size(int*arr){
     int out = sizeof(arr)/sizeof(arr[0]);
@@ -158,3 +159,138 @@ void pad_array(int *array, int rows, int cols, int pad_top, int pad_bottom, int 
 
     free(padded_array);
 }
+
+// Function to convert degrees to radians
+double toRadians(double degree) {
+    return degree * (PI / 180);
+}
+
+// Function to calculate factorial
+double factorial(int n) {
+    double result = 1;
+    for (int i = 2; i <= n; ++i) {
+        result *= i;
+    }
+    return result;
+}
+
+// Function to calculate sine using Taylor series
+double sine(double angle) {
+    angle = toRadians(angle);
+    double result = 0;
+    double power = angle;
+    double sign = 1;
+
+    for (int i = 1; i <= 10; ++i) {
+        result += sign * power / factorial(2 * i - 1);
+        power *= angle * angle;
+        sign = -sign;
+    }
+
+    return result;
+}
+
+// Function to calculate cosine using Taylor series
+double cosine(double angle) {
+    angle = toRadians(angle);
+    double result = 0;
+    double power = 1;
+    double sign = 1;
+
+    for (int i = 0; i <= 10; ++i) {
+        result += sign * power / factorial(2 * i);
+        power *= angle * angle;
+        sign = -sign;
+    }
+
+    return result;
+}
+
+// Function to calculate tangent using Taylor series
+double tangent(double angle) {
+   angle = toRadians(angle);
+    double result1 = 0;
+    double power1 = angle;
+    double sign1 = 1;
+
+    for (int i = 1; i <= 10; ++i) {
+        result1 += sign1 * power1 / factorial(2 * i - 1);
+        power1 *= angle * angle;
+        sign1 = -sign1;
+    }
+     angle = toRadians(angle);
+    double result2 = 0;
+    double power2 = 1;
+    double sign2 = 1;
+
+    for (int i = 0; i <= 10; ++i) {
+        result2 += sign2 * power2 / factorial(2 * i);
+        power2 *= angle * angle;
+        sign2 = -sign2;
+    }
+    double result=0;
+    result = result1/result2;
+    return result;
+    
+}
+
+// Function to calculate cotangent using Taylor series
+double cotangent(double angle) {
+    angle = toRadians(angle);
+    double result1 = 0;
+    double power1 = angle;
+    double sign1 = 1;
+
+    for (int i = 1; i <= 10; ++i) {
+        result1 += sign1 * power1 / factorial(2 * i - 1);
+        power1 *= angle * angle;
+        sign1 = -sign1;
+    }
+     angle = toRadians(angle);
+    double result2 = 0;
+    double power2 = 1;
+    double sign2 = 1;
+
+    for (int i = 0; i <= 10; ++i) {
+        result2 += sign2 * power2 / factorial(2 * i);
+        power2 *= angle * angle;
+        sign2 = -sign2;
+    }
+    double result=0;
+    result = result2/result1;
+    return result;
+   
+}
+
+// Function to calculate cosecant using Taylor series
+double cosecant(double angle) {
+    angle = toRadians(angle);
+    double result = 0;
+    double power = angle;
+    double sign = 1;
+
+    for (int i = 1; i <= 10; ++i) {
+        result += sign * power / factorial(2 * i - 1);
+        power *= angle * angle;
+        sign = -sign;
+    }
+    result =1/result;
+    return result;
+}
+
+// Function to calculate secant using Taylor series
+double secant(double angle) {
+    angle = toRadians(angle);
+    double result = 0;
+    double power = 1;
+    double sign = 1;
+
+    for (int i = 0; i <= 10; ++i) {
+        result += sign * power / factorial(2 * i);
+        power *= angle * angle;
+        sign = -sign;
+    }
+    result=1/result;
+    return result;
+}
+
