@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_DATA_SIZE 100 // Maximum number of data points
+
+int main() {
+    int data[MAX_DATA_SIZE]; // Array to store input data
+    int n; // Number of data points
+    double sum = 0.0; // Variable to store the sum of data points
+    double mean; // Variable to store the mean
+
+    // Prompt user for the number of data points
+    printf("Enter the number of data points (up to %d): ", MAX_DATA_SIZE);
+    // Input validation loop to ensure a valid number of data points
+    while (1) {
+        if (scanf("%d", &n) != 1) { // Check if input is not a valid integer
+            printf("Invalid input. Please enter a valid number.\n");
+            while (getchar() != '\n'); // Clear input buffer
+        } else if (n <= 0) { // Check if input is not a positive integer
+            printf("Invalid input. Please enter a positive number.\n");
+        } else if (n > MAX_DATA_SIZE) { // Check if input exceeds maximum data size
+            printf("Invalid input. Maximum number of data points exceeded.\n");
+        } else {
+            break; // Break out of loop if input is valid
+        }
+        printf("Enter the number of data points (up to %d): ", MAX_DATA_SIZE);
+    }
+
+    // Prompt user to enter the data points
+    printf("Enter the data points:\n");
+    for (int i = 0; i < n; i++) {
+        // Input validation loop to ensure valid data points
+        while (1) {
+            printf("Data %d: ", i + 1);
+            if (scanf("%d", &data[i]) != 1) { // Check if input is not a valid integer
+                printf("Invalid input. Please enter a valid number.\n");
+                while (getchar() != '\n'); // Clear input buffer
+            } else if (data[i] < 0) { // Check if input is a negative number
+                printf("Invalid input. Please enter a non-negative number.\n");
+            } else {
+                sum += data[i]; // Add data point to sum
+                break; // Break out of loop if input is valid
+            }
+        }
+    }
+
+    // Calculate mean
+    mean = sum / n;
+
+    // Display the mean
+    printf("Mean of the data points: %.2lf\n", mean);
+
+    return 0; // Return success
+}
