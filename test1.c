@@ -49,6 +49,17 @@ int main() {
     // using mean function
     int arr[15] = {1,3,5,7,9,11,13,15,17,19};
     printf("%d\n",mean(arr) );
+
+    //using trignometric functions
+    double angle;
+    printf("Enter an angle in degrees: ");
+    angle = p1/3;
+    printf("sin(%lf) = %lf\n", angle, sine(angle));
+    printf("cos(%lf) = %lf\n", angle, cosine(angle));
+    printf("tan(%lf) = %lf\n", angle, tangent(angle));
+    printf("cot(%lf) = %lf\n", angle, cotangent(angle));
+    printf("csc(%lf) = %lf\n", angle, cosecant(angle));
+    printf("sec(%lf) = %lf\n", angle, secant(angle));
     
     return 0;
 }
