@@ -2,6 +2,12 @@
 #include<stdlib.h>
 #include<math.h>
 #include<string.h>
+#define ALLOC(p, n) do {                                \
+    if (!((p) = calloc((n), sizeof(*(p))))) {           \
+        fprintf(stderr, "Memory allocation failure\n"); \
+        exit(1);                                        \
+    }                                                   \
+} while (0)
 #define PI 3.14159265
 
 int size(int*arr){
@@ -444,5 +450,56 @@ char *differentiate(float *arr) // To differentiate polynomials
     poly[m - 1] = '\0';
     return poly;
 }
+
+void *reshape_2d_3d(size_t id1, size_t id2, int iar[][id2],
+        size_t od1, size_t od2, size_t od3) {
+    // oar is a pointer to a multidimensional array; in this case, it will point to the first element of an array of arrays (of arrays).
+    int (*oar)[od2][od3];
+    size_t size1 = id1 * id2;
+    size_t size2 = od1 * od2 * od3;
+    size_t min_size = (size1 <= size2) ? size1 : size2;
+
+    ALLOC(oar, od1);
+
+    for (size_t i = 0; i < min_size; i++) {
+        oar[i / (od2 * od3)][(i / od3) % od2][i % od3] = iar[i / id2][i % id2];
+    }
+    return oar;
+}
+
+void *reshape_1d_2d(size_t id1, int* iar,
+        size_t od1, size_t od2) {
+    // oar is a pointer to a multidimensional array; in this case, it will point to the first element of an array of arrays (of arrays).
+    int (*oar)[od2];
+    size_t size1 = id1;
+    size_t size2 = od1 * od2;
+    size_t min_size = (size1 <= size2) ? size1 : size2;
+
+    ALLOC(oar, od1);
+
+    for (size_t i = 0; i < min_size; i++) {
+        oar[i / (od2)][i % od2] = iar[i];
+    }
+    return oar;
+}
+
+void *reshape_1d_3d(size_t id1, int* iar,
+        size_t od1, size_t od2, size_t od3) {
+    // oar is a pointer to a multidimensional array; in this case, it will point to the first element of an array of arrays (of arrays).
+    int (*oar)[od2][od3];
+    size_t size1 = id1;
+    size_t size2 = od1 * od2 * od3;
+    size_t min_size = (size1 <= size2) ? size1 : size2;
+
+    ALLOC(oar, od1);
+
+    for (size_t i = 0; i < min_size; i++) {
+        oar[i / (od2 * od3)][(i / od3) % od2][i % od3] = iar[i];
+    }
+    return oar;
+}
+
+
+
 
 
