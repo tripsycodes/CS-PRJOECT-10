@@ -671,6 +671,26 @@ double arccsc(double x) {
     return result;
 }
 
+void *flat(int *arr) {
+    int n = shape(arr);
+    int *flatArray = (int *)malloc(n * sizeof(int));
+    if (flatArray == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(1);
+    }
+
+    int *ptr = flatArray; // Pointer to the beginning of flatArray
+    while (*arr != '\0') {
+        *ptr = *arr; // Assign the value pointed to by arr to the value pointed to by ptr
+        ptr++;       // Move ptr to the next element in flatArray
+        arr++;       // Move arr to the next element in arr
+    }
+
+    return flatArray;
+}
+
+
+
 
 
 
