@@ -303,14 +303,14 @@ double secant(double angle) {
     return result;
 }
 
-char *polynomial(int *arr)
+void polynomial(int *arr, int length)
 {
-    int n, deg;
-    deg = length(arr) - 1;
+    int deg = length - 1;
+    int n = 0;
     int j = 0;
-    while (1)
+    while (j < length)
     {
-        if (arr[j] = '\0')
+        if (arr[j] == 0)
             break;
 
         if (arr[j] != 0)
@@ -320,9 +320,8 @@ char *polynomial(int *arr)
         j++;
     }
 
-    int *exp;
-    int terms = deg + 1; // No. of terms
-    exp = (int *)malloc(terms * sizeof(int));
+    int terms = n; // No. of terms
+    int *exp = (int *)malloc(terms * sizeof(int));
     int exponent[terms];
 
     int k = 0;
@@ -332,35 +331,30 @@ char *polynomial(int *arr)
         k++;
     }
 
-    int m = 6 * n;
-    int *ptr;
-    ptr = (int *)malloc(m * sizeof(char));
-    char poly[m];
-
     int i = 0;
-    while (arr[i] != '0')
+    while (i < length)
     {
         if (arr[i] != 0)
         {
-            poly[(6 * i)] = (int)arr[i];
-            poly[(6 * i) + 1] = 'x';
-            poly[(6 * i) + 2] = '^';
-            poly[(6 * i) + 3] = (int)exponent[i];
+            printf("%dx^%d", arr[i], exponent[i]);
+            
+            if(i < n - 1){
+                printf(" + ");
+            }
         }
         i++;
     }
-    poly[m - 1] = '\0';
-    return poly;
+    free(exp);
 }
 
-char *integrate(float *arr) // To integrate polynomials
+void integrate(int *arr, int length)
 {
-    int n, deg;
-    deg = length(arr) - 1;
+    int deg = length - 1;
+    int n = 0;
     int j = 0;
-    while (1)
+    while (j < length)
     {
-        if (arr[j] = '\0')
+        if (arr[j] == 0)
             break;
 
         if (arr[j] != 0)
@@ -370,9 +364,8 @@ char *integrate(float *arr) // To integrate polynomials
         j++;
     }
 
-    int *exp;
-    int terms = deg + 1; // No. of terms
-    exp = (int *)malloc(terms * sizeof(int));
+    int terms = n; // No. of terms
+    int *exp = (int *)malloc(terms * sizeof(int));
     int exponent[terms];
 
     int k = 0;
@@ -382,35 +375,37 @@ char *integrate(float *arr) // To integrate polynomials
         k++;
     }
 
-    int m = 6 * n;
-    int *ptr;
-    ptr = (int *)malloc(m * sizeof(char));
-    char poly[m];
-
     int i = 0;
-    while (arr[i] != '0')
+    int exp, coeff;
+    while (i < length)
     {
         if (arr[i] != 0)
         {
-            poly[(6 * i)] = (float)arr[i] / (float)(exponent[i] + 1);
-            poly[(6 * i) + 1] = 'x';
-            poly[(6 * i) + 2] = '^';
-            poly[(6 * i) + 3] = (int)(exponent[i] + 1);
+            coeff = arr[i]/(exponent[i] + 1);
+            exp = exponent[i] + 1;
+
+            if(coeff != 0){
+                printf("%dx^%d", arr[i], exponent[i]);
+            }
+            
+            if(i < n - 1){
+                printf(" + ");
+            }
         }
         i++;
     }
-    poly[m - 1] = '\0';
-    return poly;
+    free(exp);
 }
 
-char *differentiate(float *arr) // To differentiate polynomials
+
+void differentiate(int *arr, int length)
 {
-    int n, deg;
-    deg = length(arr) - 1;
+    int deg = length - 1;
+    int n = 0;
     int j = 0;
-    while (1)
+    while (j < length)
     {
-        if (arr[j] = '\0')
+        if (arr[j] == 0)
             break;
 
         if (arr[j] != 0)
@@ -420,9 +415,8 @@ char *differentiate(float *arr) // To differentiate polynomials
         j++;
     }
 
-    int *exp;
-    int terms = deg + 1; // No. of terms
-    exp = (int *)malloc(terms * sizeof(int));
+    int terms = n; // No. of terms
+    int *exp = (int *)malloc(terms * sizeof(int));
     int exponent[terms];
 
     int k = 0;
@@ -432,26 +426,29 @@ char *differentiate(float *arr) // To differentiate polynomials
         k++;
     }
 
-    int m = 6 * n;
-    int *ptr;
-    ptr = (int *)malloc(m * sizeof(char));
-    char poly[m];
-
     int i = 0;
-    while (arr[i] != '0')
+    int exp, coeff;
+    while (i < length)
     {
         if (arr[i] != 0)
         {
-            poly[(6 * i)] = (float)(arr[i] * exponent[i]);
-            poly[(6 * i) + 1] = 'x';
-            poly[(6 * i) + 2] = '^';
-            poly[(6 * i) + 3] = (int)(exponent[i] - 1);
+            coeff = arr[i]/(exponent[i] + 1);
+            exp = exponent[i] + 1;
+
+            if(coeff != 0){
+                printf("%dx^%d", arr[i], exponent[i]);
+            }
+            
+            if(i < n - 1){
+                printf(" + ");
+            }
         }
         i++;
     }
-    poly[m - 1] = '\0';
-    return poly;
+    free(exp);
 }
+
+
 
 void *reshape_2d_3d(size_t id1, size_t id2, int iar[][id2],
         size_t od1, size_t od2, size_t od3) {
