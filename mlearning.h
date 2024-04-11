@@ -432,8 +432,8 @@ void differentiate(int *arr, int length)
     {
         if (arr[i] != 0)
         {
-            coeff = arr[i]/(exponent[i] + 1);
-            exp = exponent[i] + 1;
+            coeff = arr[i]*exponent[i];
+            exp = exponent[i] - 1;
 
             if(coeff != 0){
                 printf("%dx^%d", arr[i], exponent[i]);
