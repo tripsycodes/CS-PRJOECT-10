@@ -55,7 +55,7 @@ int dimension(void *arr)
 }
 
 // To create a function to determine the shape of an array
-int shape(void *arr)
+int shape(int *arr)
 {
     int dim_size = size(arr);
     int shape = dim_size / sizeof(int);
@@ -139,7 +139,7 @@ typedef struct
 Index *argwhere(int **indicesArray, int rows, int cols, int reqCondition, int *length)
 {
 
-    Index *indices = malloc(rows * cols * sizeof(Index));
+    Index *indices = (Index *)malloc(rows * cols * sizeof(Index));
     if (indices == NULL)
     {
         printf("Memory allocation failed.\n");
@@ -425,17 +425,17 @@ void integrate(int *arr, int length)
     }
 
     int i = 0;
-    int exp, coeff;
+    int expt, coeff;
     while (i < length)
     {
         if (arr[i] != 0)
         {
             coeff = arr[i] / (exponent[i] + 1);
-            exp = exponent[i] + 1;
+            expt = exponent[i] + 1;
 
             if (coeff != 0)
             {
-                printf("%dx^%d", arr[i], exponent[i]);
+                printf("%dx^%d", coeff, expt);
             }
 
             if (i < n - 1)
@@ -477,17 +477,17 @@ void differentiate(int *arr, int length)
     }
 
     int i = 0;
-    int exp, coeff;
+    int expt, coeff;
     while (i < length)
     {
         if (arr[i] != 0)
         {
             coeff = arr[i] * exponent[i];
-            exp = exponent[i] - 1;
+            expt = exponent[i] - 1;
 
             if (coeff != 0)
             {
-                printf("%dx^%d", arr[i], exponent[i]);
+                printf("%dx^%d", coeff, expt);
             }
 
             if (i < n - 1)
@@ -605,7 +605,7 @@ void regression(int n, int ax[], int ay[])
         }
         else if (num == 3)
         {
-            return 0;
+            printf("END");
         }
     }
 }
@@ -760,7 +760,7 @@ void *flat(int *arr)
 }
 
 // Function to print a matrix
-void printMatrix(int rows, int cols, int matrix[rows][cols])
+void printMatrix(int rows, int cols, int *matrix[])
 {
     printf("Matrix:\n");
     for (int i = 0; i < rows; i++)
@@ -774,7 +774,7 @@ void printMatrix(int rows, int cols, int matrix[rows][cols])
 }
 
 // Function to add two matrices
-void matrixAddition(int rows, int cols, int matrix1[rows][cols], int matrix2[rows][cols], int result[rows][cols])
+void matrixAddition(int rows, int cols, int *matrix1[], int *matrix2[], int *result[])
 {
     for (int i = 0; i < rows; i++)
     {
@@ -786,7 +786,7 @@ void matrixAddition(int rows, int cols, int matrix1[rows][cols], int matrix2[row
 }
 
 // Function to subtract two matrices
-void matrixSubtraction(int rows, int cols, int matrix1[rows][cols], int matrix2[rows][cols], int result[rows][cols])
+void matrixSubtraction(int rows, int cols, int *matrix1[], int *matrix2[], int *result[])
 {
     for (int i = 0; i < rows; i++)
     {
@@ -822,12 +822,12 @@ double *real(double *arr)
     else
     {
         double r = -b / (2 * a);
-        double root[1] = r;
+        double root[1] = {r};
         return root;
     }
 }
 
-Complex *comp(double *arr)
+Complex *com(double *arr)
 {
     Complex r1, r2;
 
@@ -859,6 +859,6 @@ void root(double *arr)
     }
     else
     {
-        comp(arr);
+        com(arr);
     }
 }
