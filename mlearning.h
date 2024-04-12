@@ -715,7 +715,71 @@ void matrixSubtraction(int rows, int cols, int matrix1[rows][cols], int matrix2[
     }
 }
 
+typedef struct
+{
+	double real;
+	double complex;
+} Complex;
 
+double *real(double *arr)
+{
+	double a = arr[0];
+	double b = arr[1];
+	double c = arr[2];
+	double D = pow(b, 2) - 4 * a * c;
+
+	if (D != 0)
+	{
+		double r1 = (-b - sqrt(D)) / (2 * a);
+		double r2 = (-b + sqrt(D)) / (2 * a);
+
+		double root[2] = {r1, r2};
+		return root;
+	}
+
+	else
+	{
+		double r = -b / (2 * a);
+		double root[1] = r;
+		return root;
+	}
+}
+
+Complex *comp(double *arr)
+{
+	Complex r1, r2;
+
+	double a = arr[0];
+	double b = arr[1];
+	double c = arr[2];
+	double D = pow(b, 2) - 4 * a * c;
+
+	r1.real = (-b) / (2 * a);
+	r2.real = (-b) / (2 * a);
+
+	r1.complex = sqrt(-D) / (2 * a);
+	r2.complex = -sqrt(-D) / (2 * a);
+
+	Complex root[2] = {r1, r2};
+	return root;
+}
+
+void root(double *arr)
+{
+	double a = arr[0];
+	double b = arr[1];
+	double c = arr[2];
+
+	double D = pow(b, 2) - 4 * a * c;
+	if (D >= 0)
+	{
+		real(arr);
+	}
+	else
+	{
+		comp(arr);
+	}
+}
 
 
 
