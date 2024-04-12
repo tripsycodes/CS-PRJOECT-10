@@ -68,7 +68,8 @@ double* linspace(double start, double end, int n) {
      }
 
 //to return an array equally spaced on the logarithmic scale
-double* logspace(double start, double end, int n, double base) {
+double* logspace(double start, double end, int n, double base) 
+{
     double* result;
     result = (double*)calloc(n,sizeof(double));
     double log_start = log10(start) / log10(base);
