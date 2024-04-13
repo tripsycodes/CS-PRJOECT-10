@@ -60,6 +60,30 @@ int main() {
     printf("cot(%lf) = %lf\n", angle, cotangent(angle));
     printf("csc(%lf) = %lf\n", angle, cosecant(angle));
     printf("sec(%lf) = %lf\n", angle, secant(angle));
+
+    //using the function on eigen vectors
+    double A[N][N] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    double eigenvalues[N];
+    double eigenvectors[N][N];
+
+    eig(A, eigenvalues, eigenvectors);
+
+    // Print eigenvalues
+    printf("Eigenvalues: ");
+    for (int i = 0; i < N; i++) {
+        printf("%.4f ", eigenvalues[i]);
+    }
+    printf("\n");
+
+    // Print eigenvectors
+    printf("Eigenvectors:\n");
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            printf("%.4f ", eigenvectors[i][j]);
+        }
+        printf("\n");
+    }
+
     
     return 0;
 }
