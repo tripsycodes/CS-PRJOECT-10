@@ -198,6 +198,96 @@ int dimension(void *arr)
         return -1;
 }
 
+// Bubble sort function
+void bubbleSort(int arr[], int n)
+{
+    int i = 0;
+    while (i < n - 1)
+    {
+        int j = 0;
+        while (j < n - i - 1)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                // swap arr[j] and arr[j+1]
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+            j++;
+        }
+        i++;
+    }
+}
+
+// Insertion sort function
+void insertionSort(int arr[], int n)
+{
+    int i = 1;
+    while (i < n)
+    {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key)
+        {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+        i++;
+    }
+}
+
+// Selection sort function
+void selectionSort(int arr[], int n)
+{
+    int i = 0;
+    while (i < n - 1)
+    {
+        int minIndex = i;
+        int j = i + 1;
+        while (j < n)
+        {
+            if (arr[j] < arr[minIndex])
+            {
+                minIndex = j;
+            }
+            j++;
+        }
+        // swap arr[i] and arr[minIndex]
+        int temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+        i++;
+    }
+}
+
+// Function to input arrays
+void exampleArrays(int numArrays)
+{
+    int i, j, n;
+
+    for (i = 0; i < numArrays; i++)
+    {
+        printf("Enter the size of array %d: ", i + 1);
+        scanf("%d", &n);
+
+        int arr[n];
+        printf("Enter %d elements for array %d: ", n, i + 1);
+        for (j = 0; j < n; j++)
+        {
+            scanf("%d", &arr[j]);
+        }
+
+        printf("Array %d: ", i + 1);
+        for (j = 0; j < n; j++)
+        {
+            printf("%d ", arr[j]);
+        }
+        printf("\n");
+    }
+}
+
 // To create a function to determine the shape of an array
 int shape(int *arr)
 {
