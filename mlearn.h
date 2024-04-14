@@ -164,6 +164,85 @@ int value_of_poly(int *arr, int degree, int x)
     return value;
 }
 
+
+void trace(long long n,long long a[][n])
+{
+    long long trace = 0;
+    for(long long i=0;i<n;i++)
+    {
+        trace += a[i][i];
+    }
+    printf("the trace of the martix is %ld\n",trace);
+}
+
+void triu(long long n,long long a[][n])
+{
+    printf("the upper triangular matrix is :\n");
+    
+    long long triu[n][n];
+    for(long long i=0;i<n;i++)
+    {
+        for(long long j=0;j<n;j++)
+        {
+          if(i>=j)
+          {
+            triu[i][j] = a[i][j];
+          }
+          else
+          {
+            triu[i][j] = 0;
+          }
+        }
+    }
+
+    for(long long i=0;i<n;i++)
+    {
+        for(long long j=0;j<n;j++)
+        {
+            printf("%ld ",triu[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void tril(long long n,long long a[][n])
+{
+    printf("the lower triangular matrix is :\n");
+    
+    long long tril[n][n];
+    int i =0, j =0;
+    while(i<n)
+    {
+        while(j<n)
+        {
+          if(i>=j)
+          {
+            tril[i][j] = 0;
+          }
+          else
+          {
+            tril[i][j] = a[i][j];
+          }
+            j++;
+        }
+        i++;
+    }
+
+    i = 0;
+    j = 0;
+    while(i<n)
+    {
+        while(j<n)
+        {
+            printf("%ld ",tril[i][j]);
+            j++;
+        }
+        printf("\n");
+        i++;
+    }
+  
+}
+
 // To create a function to calculate the length of an array
 int length(int arr[])
 {
