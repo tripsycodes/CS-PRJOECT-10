@@ -143,6 +143,75 @@ void eig(double A[N][N], double eigenvalues[N], double eigenvectors[N][N]) {
     }
 }
 
+void matrixmultiply(int n,int c,int m,int a[n][c],int b[c][m])
+{
+  int ans[n][m];
+  for(int i=0;i<n;i++)
+  {
+    for(int j=0;j<m;j++)
+    {
+      int sum = 0;
+      for(int k=0;k<c;k++)
+      {
+        sum += a[i][k]*b[k][j];
+      }
+      ans[i][j] = sum;
+    }
+  }
+  printf("the multiplication matrix is : \n");
+  for(int i=0;i<n;i++)
+  {
+    for(int j=0;j<m;j++)
+    {
+      printf("%d ",ans[i][j]);
+    }
+    printf("\n");
+  }
+
+}
+void diagflat(int n,int a[],int offset)
+{
+  int x = offset;
+  if(x<0)
+  {
+    x = -x;
+  }
+  int m = n+x;
+  int ans[m][m];
+  for(int i=0;i<m;i++)
+  {
+    for(int j=0;j<m;j++)
+    {
+      ans[i][j] = 0;
+    }
+  }
+  if(offset>=0)
+  {
+    for(int i=0;i<m-offset;i++)
+    {
+      ans[i][i+offset] = a[i];
+    }
+  }
+  else
+  {
+    int pnt = 0;
+    for(int i=x;i<m;i++)
+    {
+      ans[i][i+offset] = a[pnt];
+      pnt++;
+    }
+  }
+  printf("the diagflat matrix is : \n");
+  for(int i=0;i<m;i++)
+  {
+    for(int j=0;j<m;j++)
+    {
+      printf("%d ",ans[i][j]);
+    }
+    printf("\n");
+  }
+
+}
 
 int value_of_poly(int *arr, int degree, int x)
 {
