@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#define NAN (0.0 / 0.0)
 #define N 3 // Size of the square matrix defined for finding eigen values and gaussian elimination
 
 #define ALLOC(p, n)                                         \
@@ -1179,6 +1180,200 @@ void matrixSubtraction(int rows, int cols, int *matrix1[], int *matrix2[], int *
     }
 }
 
+double power(double x, int n) {
+    double result = 1.0;
+    for (int i = 0; i < n; ++i) {
+        result *= x;
+    }
+    return result;
+}
+
+double factorial(int n) {
+    double result = 1.0;
+    for (int i = 1; i <= n; ++i) {
+        result *= i;
+    }
+    return result;
+}
+
+double sinh(double x) {
+    double result = x;
+    double x_squared = x * x;
+    double x_power = x;
+    for (int n = 3; n <= 15; n += 2) {
+        x_power *= x_squared;
+        result += x_power / factorial(n);
+    }
+    return result;
+}
+
+double cosh(double x) {
+    double result = 1.0;
+    double x_squared = x * x;
+    double x_power = 1.0;
+    for (int n = 2; n <= 14; n += 2) {
+        x_power *= x_squared;
+        result += x_power / factorial(n);
+    }
+    return result;
+}
+
+double tanh(double x) {
+    double result1 = x;
+    double x_squared1 = x * x;
+    double x_power1 = x;
+    for (int n = 3; n <= 15; n += 2) {
+        x_power1 *= x_squared1;
+        result1 += x_power1 / factorial(n);
+    }
+    double result2 = 1.0;
+    double x_squared2 = x * x;
+    double x_power2 = 1.0;
+    for (int n = 2; n <= 14; n += 2) {
+        x_power2 *= x_squared2;
+        result2 += x_power2 / factorial(n);
+    }
+    return result1 / result2;
+}
+
+double coth(double x) {
+    double result;
+    double result1 = x;
+    double x_squared1 = x * x;
+    double x_power1 = x;
+    for (int n = 3; n <= 15; n += 2) {
+        x_power1 *= x_squared1;
+        result1 += x_power1 / factorial(n);
+    }
+    double result2 = 1.0;
+    double x_squared2 = x * x;
+    double x_power2 = 1.0;
+    for (int n = 2; n <= 14; n += 2) {
+        x_power2 *= x_squared2;
+        result2 += x_power2 / factorial(n);
+    }
+    result = result2 / result1;
+    return result;
+
+}
+
+double sech(double x) {
+    double result = 1.0;
+    double x_squared = x * x;
+    double x_power = 1.0;
+    for (int n = 2; n <= 14; n += 2) {
+        x_power *= x_squared;
+        result += x_power / factorial(n);
+    }
+    result = 1 / result;
+    return result;
+
+}
+
+double csch(double x) {
+    double result = x;
+    double x_squared = x * x;
+    double x_power = x;
+    for (int n = 3; n <= 15; n += 2) {
+        x_power *= x_squared;
+        result += x_power / factorial(n);
+    }
+    result = 1 / result;
+    return result;
+}
+
+double my_sqrt(double x) {
+    if (x == 0) return 0;
+    double guess = x / 2.0;
+    double error = 0.0001; // Adjust for desired precision
+    while ((guess * guess - x) > error || (guess * guess - x) < -error) {
+        guess = (guess + x / guess) / 2.0;
+    }
+    return guess;
+}
+
+double my_log(double x) {
+    if (x <= 0) return NAN;
+    double sum = 0;
+    double term = (x - 1) / (x + 1);
+    double term_squared = term * term;
+    int n = 1;
+    while (term_squared > 1e-12) {
+        sum += term / n;
+        term *= term_squared;
+        n += 2;
+    }
+    return 2 * sum;
+}
+
+double my_pow(double x, int n) {
+    double result = 1.0;
+    for (int i = 0; i < n; i++) {
+        result *= x;
+    }
+    return result;
+}
+
+double arcsinh(double x) {
+    double my_sqrt(double x) {
+        if (x == 0) return 0;
+        double guess = x / 2.0;
+        double error = 0.0001; // Adjust for desired precision
+        while ((guess * guess - x) > error || (guess * guess - x) < -error) {
+            guess = (guess + x / guess) / 2.0;
+        }
+        return guess;
+    }
+
+    return (x >= 0) ? (x + my_sqrt(x * x + 1)) : -1;
+}
+
+double arccosh(double x) {
+    double my_sqrt(double x) {
+        if (x == 0) return 0;
+        double guess = x / 2.0;
+        double error = 0.0001; // Adjust for desired precision
+        while ((guess * guess - x) > error || (guess * guess - x) < -error) {
+            guess = (guess + x / guess) / 2.0;
+        }
+        return guess;
+    }
+
+    return (x >= 1) ? my_sqrt(x * x - 1) : NAN;
+}
+
+double arctanh(double x) {
+    double my_log(double x) {
+        if (x <= 0) return NAN;
+        double sum = 0;
+        double term = (x - 1) / (x + 1);
+        double term_squared = term * term;
+        int n = 1;
+        while (term_squared > 1e-12) {
+            sum += term / n;
+            term *= term_squared;
+            n += 2;
+        }
+        return 2 * sum;
+    }
+
+    return (x > -1 && x < 1) ? 0.5 * my_log((1 + x) / (1 - x)) : NAN;
+}
+
+double arccoth(double x) {
+    if (x <= -1.0 || x >= 1.0) return NAN;
+    return 0.5 * my_log((x + 1) / (x - 1));
+}
+
+double arccosech(double x) {
+    if (x == 0.0) return NAN;
+    return my_log(1 / x + my_sqrt(1 / (x * x) + 1));
+}
+
+double arcsech(double x) {
+    if (x <= 0.0 || x > 1.0) return NAN;
+    return my_log(1 / x + my_sqrt(1 / (x * x) - 1));
+}
 typedef struct
 {
     double real;
@@ -1243,4 +1438,30 @@ void root(double *arr)
     {
         com(arr);
     }
+}
+
+float find_max(float *numbers, int size) {
+    if (size == 0)
+        return 0;
+    
+    float max_number = numbers[0];
+    for (int i = 1; i < size; i++) {
+        if (numbers[i] > max_number) {
+            max_number = numbers[i];
+        }
+    }
+    return max_number;
+}
+
+float find_min(float *numbers, int size) {
+    if (size == 0)
+        return 0;
+    
+    float min_number = numbers[0];
+    for (int i = 1; i < size; i++) {
+        if (numbers[i] < min_number) {
+            min_number = numbers[i];
+        }
+    }
+    return min_number;
 }
