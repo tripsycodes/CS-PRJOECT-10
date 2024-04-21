@@ -751,19 +751,8 @@ void polynomial(int *arr, int length)
     int deg = length - 1;
     int n = 0;
     int j = 0;
-    while (j < length)
-    {
-        if (arr[j] == 0)
-            break;
 
-        if (arr[j] != 0)
-        {
-            n++;
-        }
-        j++;
-    }
-
-    int terms = n; // No. of terms
+    int terms = deg + 1; // No. of terms
     int *exp = (int *)malloc(terms * sizeof(int));
     int exponent[terms];
 
@@ -794,21 +783,9 @@ void polynomial(int *arr, int length)
 void integrate(int *arr, int length)
 {
     int deg = length - 1;
-    int n = 0;
     int j = 0;
-    while (j < length)
-    {
-        if (arr[j] == 0)
-            break;
 
-        if (arr[j] != 0)
-        {
-            n++;
-        }
-        j++;
-    }
-
-    int terms = n; // No. of terms
+    int terms = deg + 1; // No. of terms
     int *exp = (int *)malloc(terms * sizeof(int));
     int exponent[terms];
 
@@ -846,21 +823,9 @@ void integrate(int *arr, int length)
 void differentiate(int *arr, int length)
 {
     int deg = length - 1;
-    int n = 0;
     int j = 0;
-    while (j < length)
-    {
-        if (arr[j] == 0)
-            break;
 
-        if (arr[j] != 0)
-        {
-            n++;
-        }
-        j++;
-    }
-
-    int terms = n; // No. of terms
+    int terms = deg + 1; // No. of terms
     int *exp = (int *)malloc(terms * sizeof(int));
     int exponent[terms];
 
