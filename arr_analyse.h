@@ -235,6 +235,17 @@ int value_of_poly(int *arr, int degree, int x)
     return value;
 }
 
+double** vander(double* arr, int n, int m) {
+    double** result = (double**)malloc(n * sizeof(double*)); // allocating memory for the matrix
+    for (int i = 0; i < n; i++) {
+        result[i] = (double*)malloc(m * sizeof(double)); // allocating memory for each row
+        for (int j = 0; j < m; j++) {
+            result[i][j] = pow(arr[i], m - 1 - j); // pow = power function which is included in the math.h library
+        }
+    }
+    return result;
+}
+
 
 void trace(long long n,long long a[][n])
 {
