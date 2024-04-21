@@ -1465,3 +1465,26 @@ float find_min(float *numbers, int size) {
     }
     return min_number;
 }
+
+void transposeMatrix(int mat[][10], int transpose[][10], int rows, int cols) {
+    int i, j;
+
+    // Transposing matrix
+    for (i = 0; i < cols; i++) {
+        for (j = 0; j < rows; j++) {
+            transpose[i][j] = mat[j][i];
+        }
+    }
+}
+
+// Function to display a matrix
+void displayMatrix(int mat[][10], int rows, int cols) {
+    int i, j;
+
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
+            printf("%d ", mat[i][j]);
+        }
+        printf("\n");
+    }
+}
