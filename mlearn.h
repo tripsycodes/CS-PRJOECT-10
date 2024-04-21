@@ -21,6 +21,7 @@
 int size(int *arr)
 {
     int out = sizeof(arr) / sizeof(arr[0]);
+    return out;
 }
 
 void gaussian_elimination(double A[N][N+1]) {
