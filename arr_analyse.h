@@ -770,7 +770,7 @@ void polynomial(int *arr, int length)
         {
             printf("%dx^%d", arr[i], exponent[i]);
 
-            if (i < n - 1)
+            if (i < terms - 1)
             {
                 printf(" + ");
             }
@@ -810,7 +810,7 @@ void integrate(int *arr, int length)
                 printf("%dx^%d", coeff, expt);
             }
 
-            if (i < n - 1)
+            if (i < terms - 1)
             {
                 printf(" + ");
             }
@@ -850,7 +850,7 @@ void differentiate(int *arr, int length)
                 printf("%dx^%d", coeff, expt);
             }
 
-            if (i < n - 1)
+            if (i < terms - 1)
             {
                 printf(" + ");
             }
